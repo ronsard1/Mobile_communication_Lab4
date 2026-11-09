@@ -1,0 +1,47 @@
+Mini Project 4.3 sample log: aggregator (plant1/+/+), alerts, retained messages, new topic, LWT.
+Sensor publish lines are not echoed; every reading is in readings.csv.
+
+[16:17:44.354] ===== started aggregator: aggregator.py --csv logs/readings.csv --summary 6
+[16:17:44.422] AGG subscribed to plant1/+/+ (QoS 1)
+[16:17:45.155] ===== started A-temp: sensor.py --topic plant1/lineA/temperature --base 73 --amp 6 --interval 1.0 --lwt --retain --seed 1
+[16:17:45.155] ===== started A-vib: sensor.py --topic plant1/lineA/vibration --base 4.5 --amp 1.5 --noise 0.3 --spike 3.5 --interval 0.5 --seed 2
+[16:17:45.162] ===== started B-temp: sensor.py --topic plant1/lineB/temperature --base 68 --amp 5 --interval 1.5 --retain --seed 3
+[16:17:45.239] AGG STATUS plant1/lineA/status = online
+[16:17:45.239] AGG NEW TOPIC plant1/lineA/temperature (first value 73.64; threshold 80.0)
+[16:17:45.239] SENSOR plant1/lineA/temperature up (every 1.0 s, QoS 1, LWT, retained)
+[16:17:45.278] AGG NEW TOPIC plant1/lineA/vibration (first value 8.70; threshold 7.1)
+[16:17:45.278] AGG ALERT plant1/lineA/vibration = 8.70 > 7.1
+[16:17:45.278] SENSOR plant1/lineA/vibration up (every 0.5 s, QoS 1)
+[16:17:45.278] SENSOR plant1/lineB/temperature up (every 1.5 s, QoS 1, retained)
+[16:17:45.279] AGG NEW TOPIC plant1/lineB/temperature (first value 68.05; threshold 80.0)
+[16:17:45.779] AGG CLEAR plant1/lineA/vibration = 4.54 back below 7.1
+[16:17:50.421] AGG SUMMARY (3 topics): plant1/lineA/temperature = 79.07 (n=6, min 73.64, max 79.07) | plant1/lineA/vibration = 6.07 (n=11, min 4.54, max 8.70) | plant1/lineB/temperature = 72.81 (n=4, min 68.05, max 79.92)
+[16:17:53.163] ===== retained-message demo: a late subscriber joins
+[16:17:53.163] ===== started late1: late_subscriber.py 
+[16:17:53.254] LATE joiner subscribed to plant1/# (only retained messages are printed)
+[16:17:53.298] LATE received at subscribe: plant1/lineA/status = online  [RETAINED]
+[16:17:53.298] LATE received at subscribe: plant1/lineA/temperature = 76.68  [RETAINED]
+[16:17:53.298] LATE received at subscribe: plant1/lineB/temperature = 71.90  [RETAINED]
+[16:17:54.242] AGG ALERT plant1/lineA/temperature = 84.04 > 80.0
+[16:17:55.242] AGG CLEAR plant1/lineA/temperature = 73.61 back below 80.0
+[16:17:56.421] AGG SUMMARY (3 topics): plant1/lineA/temperature = 71.24 (n=12, min 71.24, max 84.04) | plant1/lineA/vibration = 4.21 (n=23, min 3.73, max 8.70) | plant1/lineB/temperature = 66.73 (n=8, min 66.73, max 79.92)
+[16:17:57.268] ===== NEW SENSOR added while running; the aggregator code is not touched
+[16:17:57.269] ===== started B-hum: sensor.py --topic plant1/lineB/humidity --base 62 --amp 6 --noise 1 --spike 6 --interval 1.0 --seed 4
+[16:17:57.340] SENSOR plant1/lineB/humidity up (every 1.0 s, QoS 1)
+[16:17:57.341] AGG NEW TOPIC plant1/lineB/humidity (first value 62.04; threshold 70.0)
+[16:18:02.422] AGG SUMMARY (4 topics): plant1/lineA/temperature = 76.70 (n=18, min 66.75, max 84.04) | plant1/lineA/vibration = 3.51 (n=35, min 2.68, max 8.70) | plant1/lineB/humidity = 67.29 (n=6, min 62.04, max 67.77) | plant1/lineB/temperature = 63.39 (n=12, min 62.79, max 79.92)
+[16:18:05.271] ===== LWT demo: lineA temperature sensor HARD-KILLED (SIGKILL, no DISCONNECT)
+[16:18:05.271] AGG STATUS plant1/lineA/status = offline
+[16:18:06.792] AGG ALERT plant1/lineA/vibration = 8.58 > 7.1
+[16:18:07.293] AGG CLEAR plant1/lineA/vibration = 5.25 back below 7.1
+[16:18:08.422] AGG SUMMARY (4 topics): plant1/lineA/temperature = 74.01 (n=21, min 66.75, max 84.04) | plant1/lineA/vibration = 6.00 (n=47, min 2.68, max 8.70) | plant1/lineB/humidity = 61.44 (n=12, min 61.44, max 67.93) | plant1/lineB/temperature = 70.53 (n=16, min 62.79, max 79.92)
+[16:18:09.271] ===== late subscriber after the crash: retained last reading + retained 'offline' status
+[16:18:09.272] ===== started late2: late_subscriber.py 
+[16:18:09.356] LATE joiner subscribed to plant1/# (only retained messages are printed)
+[16:18:09.398] LATE received at subscribe: plant1/lineA/status = offline  [RETAINED]
+[16:18:09.399] LATE received at subscribe: plant1/lineA/temperature = 74.01  [RETAINED]
+[16:18:09.399] LATE received at subscribe: plant1/lineB/temperature = 72.05  [RETAINED]
+[16:18:11.296] AGG ALERT plant1/lineA/vibration = 10.07 > 7.1
+[16:18:11.796] AGG CLEAR plant1/lineA/vibration = 6.20 back below 7.1
+[16:18:13.797] AGG ALERT plant1/lineA/vibration = 9.09 > 7.1
+[16:18:13.975] ===== all stopped

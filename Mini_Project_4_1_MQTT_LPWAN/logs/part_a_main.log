@@ -1,0 +1,64 @@
+Part A, steps 8-10: normal operation, retained messages on a late subscriber, LWT on an ungraceful
+disconnect, and a clean disconnect for comparison. Publisher keep-alive 5 s, interval 5 s, QoS 1.
+
+[16:12:10.711] ===== broker started (pid 723)
+[16:12:10.711] ===== started dashboard_subscriber.py
+[16:12:10.712] ===== started alert_subscriber.py
+[16:12:10.777] DASHBOARD connected (rc=Success, session present=False)
+[16:12:10.778] DASHBOARD subscribed to factory/line3/temperature, factory/line3/status (QoS 1)
+[16:12:10.798] ALERTER subscribed to factory/+/temperature, factory/+/status (QoS 1), threshold 90.0
+[16:12:11.712] ===== started sensor_publisher.py --seed 11
+[16:12:11.779] CONNECTED to 127.0.0.1:1883 as line3-temp-sensor (rc=Success, keepalive 5 s)
+[16:12:11.779] PUBLISH factory/line3/status = online (QoS 1, retained)
+[16:12:11.780] DASHBOARD factory/line3/status         online
+[16:12:12.080] PUBLISH factory/line3/temperature = 75.8 (QoS 1, retained)
+[16:12:12.081] DASHBOARD factory/line3/temperature    75.8
+[16:12:17.080] PUBLISH factory/line3/temperature = 79.6 (QoS 1)
+[16:12:17.081] DASHBOARD factory/line3/temperature    79.6
+[16:12:22.081] PUBLISH factory/line3/temperature = 92.3 (QoS 1)
+[16:12:22.082] DASHBOARD factory/line3/temperature    92.3
+[16:12:22.082] ALERTER ALERT: factory/line3/temperature = 92.3 exceeds 90.0
+[16:12:27.082] DASHBOARD factory/line3/temperature    76.3
+[16:12:27.082] PUBLISH factory/line3/temperature = 76.3 (QoS 1)
+[16:12:29.228] ===== step 9: stopped dashboard (pid 724)
+[16:12:30.728] ===== step 9: restarting the dashboard between two publish cycles
+[16:12:30.729] ===== started dashboard_subscriber.py
+[16:12:30.808] DASHBOARD connected (rc=Success, session present=False)
+[16:12:30.808] DASHBOARD subscribed to factory/line3/temperature, factory/line3/status (QoS 1)
+[16:12:30.809] DASHBOARD factory/line3/temperature    75.8  [RETAINED]
+[16:12:30.809] DASHBOARD factory/line3/status         online  [RETAINED]
+[16:12:32.082] PUBLISH factory/line3/temperature = 77.8 (QoS 1)
+[16:12:32.083] DASHBOARD factory/line3/temperature    77.8
+[16:12:37.083] PUBLISH factory/line3/temperature = 80.6 (QoS 1)
+[16:12:37.083] DASHBOARD factory/line3/temperature    80.6
+[16:12:40.731] ===== step 10: HARD KILL (SIGKILL, no DISCONNECT sent) of publisher (pid 726)
+[16:12:40.731] ===== the OS closes the dead process's TCP socket, so the broker sees an unclean close at once
+[16:12:40.731] ALERTER ALERT: factory/line3/status reports OFFLINE
+[16:12:40.731] DASHBOARD factory/line3/status         offline
+[16:12:45.731] ===== step 10b: silent link loss - publisher frozen with SIGSTOP (socket stays open, no PINGREQ)
+[16:12:45.732] ===== started sensor_publisher.py --seed 9 --interval 5
+[16:12:45.806] CONNECTED to 127.0.0.1:1883 as line3-temp-sensor (rc=Success, keepalive 5 s)
+[16:12:45.806] PUBLISH factory/line3/status = online (QoS 1, retained)
+[16:12:45.807] DASHBOARD factory/line3/status         online
+[16:12:46.108] PUBLISH factory/line3/temperature = 76.2 (QoS 1, retained)
+[16:12:46.109] DASHBOARD factory/line3/temperature    76.2
+[16:12:47.732] ===== publisher frozen (pid 731); only the broker's keep-alive timer can detect it (1.5 x 5 s = 7.5 s after the last packet, checked by Mosquitto every 5 s)
+[16:12:58.028] ALERTER ALERT: factory/line3/status reports OFFLINE
+[16:12:58.028] DASHBOARD factory/line3/status         offline
+[16:13:02.735] ===== removed frozen publisher3 (pid 731)
+[16:13:03.735] ===== comparison: publisher run with a clean disconnect after 2 readings
+[16:13:03.736] ===== started sensor_publisher.py --seed 8 --count 2 --interval 2
+[16:13:03.807] CONNECTED to 127.0.0.1:1883 as line3-temp-sensor (rc=Success, keepalive 5 s)
+[16:13:03.808] DASHBOARD factory/line3/status         online
+[16:13:03.808] PUBLISH factory/line3/status = online (QoS 1, retained)
+[16:13:04.108] DASHBOARD factory/line3/temperature    67.9
+[16:13:04.108] PUBLISH factory/line3/temperature = 67.9 (QoS 1, retained)
+[16:13:06.108] PUBLISH factory/line3/temperature = 93.7 (QoS 1)
+[16:13:06.109] ALERTER ALERT: factory/line3/temperature = 93.7 exceeds 90.0
+[16:13:06.109] DASHBOARD factory/line3/temperature    93.7
+[16:13:08.108] clean disconnect (DISCONNECT packet sent: the broker discards the LWT)
+[16:13:08.109] DISCONNECTED (rc=Normal disconnection)
+[16:13:17.126] ===== no 'offline' arrived after the clean disconnect: the broker discarded the LWT
+[16:13:17.128] ===== stopped alerter (pid 725)
+[16:13:17.142] ===== stopped dashboard (pid 730)
+[16:13:17.229] ===== broker stopped (SIGTERM)

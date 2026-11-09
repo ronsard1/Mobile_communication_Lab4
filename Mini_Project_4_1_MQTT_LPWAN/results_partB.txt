@@ -1,0 +1,29 @@
+Scenario: {'devices': 200, 'area_km2': 25, 'payload_bytes': 12, 'interval_min': 30, 'distance_km': 8.0, 'target_years': 5, 'battery_mAh': 19000, 'battery_V': 3.6}
+Path loss at 8 km: 91.5 + 10 x 3.5 x log10(8) = 123.1 dB
+LoRaWAN SF12 time on air for 12 + 13 bytes: 1483 ms
+============================================================================================================
+technology           Tx dBm sens dBm  MCL dB margin dB  mAh/cycle  mAh/year   years  5 y?  network
+NB-IoT                   23     -129     152      28.9     0.1222      2185     8.7   yes  operator (cellular)
+LTE-M (CE Mode B)        23     -125     148      24.9     0.2500      4450     4.3    NO  operator (cellular)
+LoRaWAN SF12             14     -137     151      27.9     0.0181       335    56.7   yes  self-owned gateway
+5G RedCap                23     -110     133       9.9     0.1667      3051     6.2   yes  operator (5G SA)  (lab task 5)
+  assumptions per report: NB-IoT 220 mA x 2.0 s, LTE-M 450 mA x 2.0 s (CE repetitions), LoRaWAN 44 mA x time on air,
+  RedCap 600 mA x 1.0 s; sleep 5 / 8 / 2 / 15 uA. Lithium self-discharge (~1%/year) caps any real life near 15-20 years.
+  LoRaWAN airtime per device per day: 71 s (1% duty cycle allows 864 s; public TTN fair use 30 s)
+============================================================================================================
+Lab task 6: sensitivity to the path-loss exponent n (margin at 8 km in dB; maximum range in km for margin = 0)
+technology                     n=2.5           n=3.0           n=3.5           n=4.0
+NB-IoT                37.9 /   263 km  33.4 /   104 km  28.9 /    54 km  24.4 /    33 km
+LTE-M (CE Mode B)     33.9 /   182 km  29.4 /    76 km  24.9 /    41 km  20.4 /    26 km
+LoRaWAN SF12          36.9 /   240 km  32.4 /    96 km  27.9 /    50 km  23.4 /    31 km
+5G RedCap             18.9 /    46 km  14.4 /    24 km   9.9 /    15 km   5.4 /    11 km
+  Ranges beyond ~30-40 km exceed the radio horizon of ground-level sensors and a gateway mast, so they are not reachable.
+============================================================================================================
+Lab task 4: container on an ocean crossing - margin (dB) if the nearest terrestrial site were d km away (n = 3.5;
+            over open sea n ~ 2.5 is kinder, shown in brackets)
+technology                     10 km           50 km          200 km         1000 km         5000 km
+NB-IoT                    26 (  36)       1 (  18)     -20 (   3)     -44 ( -14)     -69 ( -32)
+LTE-M (CE Mode B)         22 (  32)      -3 (  14)     -24 (  -1)     -48 ( -18)     -73 ( -36)
+LoRaWAN SF12              24 (  34)       0 (  17)     -21 (   2)     -46 ( -16)     -70 ( -33)
+5G RedCap                  6 (  16)     -18 (  -1)     -39 ( -16)     -64 ( -34)     -88 ( -51)
+  Beyond ~30-50 km offshore every terrestrial link fails; mid-ocean the distance to a base station is undefined.

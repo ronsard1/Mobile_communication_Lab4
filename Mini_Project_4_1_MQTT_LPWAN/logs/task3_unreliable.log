@@ -1,0 +1,110 @@
+Lab task 3: broker stopped for 5 s and restarted while the publisher sends 40 readings every 0.5 s.
+Publisher and subscriber use persistent sessions (clean_session=False); the broker keeps sessions on disk.
+
+[16:10:50.161] ===== broker started (pid 683, persistence on)
+[16:10:50.563] ===== started sensor_publisher.py --client-id task3-pub-q0 --qos 0 --seq --persistent --interval 0.5 --count 40 --status-topic none --seed 1
+[16:10:50.646] CONNECTED to 127.0.0.1:1883 as task3-pub-q0 (rc=Success, keepalive 5 s)
+[16:10:50.946] PUBLISH factory/line3/temperature = 64.7 #1 (QoS 0, retained)
+[16:10:51.447] PUBLISH factory/line3/temperature = 89.7 #2 (QoS 0)
+[16:10:51.947] PUBLISH factory/line3/temperature = 86.7 #3 (QoS 0)
+[16:10:52.447] PUBLISH factory/line3/temperature = 68.9 #4 (QoS 0)
+[16:10:52.948] PUBLISH factory/line3/temperature = 77.3 #5 (QoS 0)
+[16:10:53.448] PUBLISH factory/line3/temperature = 75.7 #6 (QoS 0)
+[16:10:53.949] PUBLISH factory/line3/temperature = 82.8 #7 (QoS 0)
+[16:10:54.449] PUBLISH factory/line3/temperature = 87.6 #8 (QoS 0)
+[16:10:54.950] PUBLISH factory/line3/temperature = 63.3 #9 (QoS 0)
+[16:10:55.450] PUBLISH factory/line3/temperature = 61.0 #10 (QoS 0)
+[16:10:55.951] PUBLISH factory/line3/temperature = 89.3 #11 (QoS 0)
+[16:10:56.451] PUBLISH factory/line3/temperature = 75.1 #12 (QoS 0)
+[16:10:56.652] ===== broker stopped (SIGTERM)
+[16:10:56.652] ===== QoS 0: broker DOWN for 5 s (unreliable network)
+[16:10:56.653] DISCONNECTED (rc=Unspecified error)
+[16:10:56.951] PUBLISH factory/line3/temperature = 86.7 #13 (QoS 0)  [DROPPED: not connected]
+[16:10:57.452] PUBLISH factory/line3/temperature = 60.1 #14 (QoS 0)  [DROPPED: not connected]
+[16:10:57.952] PUBLISH factory/line3/temperature = 75.6 #15 (QoS 0)  [DROPPED: not connected]
+[16:10:58.453] PUBLISH factory/line3/temperature = 85.3 #16 (QoS 0)  [DROPPED: not connected]
+[16:10:58.953] PUBLISH factory/line3/temperature = 68.0 #17 (QoS 0)  [DROPPED: not connected]
+[16:10:59.453] PUBLISH factory/line3/temperature = 93.1 #18 (QoS 0)  [DROPPED: not connected]
+[16:10:59.953] PUBLISH factory/line3/temperature = 91.5 #19 (QoS 0)  [DROPPED: not connected]
+[16:11:00.454] PUBLISH factory/line3/temperature = 61.1 #20 (QoS 0)  [DROPPED: not connected]
+[16:11:00.954] PUBLISH factory/line3/temperature = 60.9 #21 (QoS 0)  [DROPPED: not connected]
+[16:11:01.455] PUBLISH factory/line3/temperature = 78.9 #22 (QoS 0)  [DROPPED: not connected]
+[16:11:01.955] PUBLISH factory/line3/temperature = 92.9 #23 (QoS 0)  [DROPPED: not connected]
+[16:11:02.254] ===== broker started (pid 690, persistence on)
+[16:11:02.455] PUBLISH factory/line3/temperature = 73.3 #24 (QoS 0)  [DROPPED: not connected]
+[16:11:02.956] PUBLISH factory/line3/temperature = 67.6 #25 (QoS 0)  [DROPPED: not connected]
+[16:11:03.456] PUBLISH factory/line3/temperature = 74.8 #26 (QoS 0)  [DROPPED: not connected]
+[16:11:03.655] CONNECTED to 127.0.0.1:1883 as task3-pub-q0 (rc=Success, keepalive 5 s)
+[16:11:03.957] PUBLISH factory/line3/temperature = 61.0 #27 (QoS 0)
+[16:11:04.457] PUBLISH factory/line3/temperature = 67.8 #28 (QoS 0)
+[16:11:04.957] PUBLISH factory/line3/temperature = 75.3 #29 (QoS 0)
+[16:11:05.458] PUBLISH factory/line3/temperature = 77.4 #30 (QoS 0)
+[16:11:05.960] PUBLISH factory/line3/temperature = 68.2 #31 (QoS 0)
+[16:11:06.460] PUBLISH factory/line3/temperature = 68.1 #32 (QoS 0)
+[16:11:06.962] PUBLISH factory/line3/temperature = 67.7 #33 (QoS 0)
+[16:11:07.463] PUBLISH factory/line3/temperature = 76.1 #34 (QoS 0)
+[16:11:07.963] PUBLISH factory/line3/temperature = 70.1 #35 (QoS 0)
+[16:11:08.464] PUBLISH factory/line3/temperature = 60.8 #36 (QoS 0)
+[16:11:08.964] PUBLISH factory/line3/temperature = 89.3 #37 (QoS 0)
+[16:11:09.465] PUBLISH factory/line3/temperature = 79.5 #38 (QoS 0)
+[16:11:09.965] PUBLISH factory/line3/temperature = 82.5 #39 (QoS 0)
+[16:11:10.466] PUBLISH factory/line3/temperature = 66.5 #40 (QoS 0)
+[16:11:10.966] clean disconnect (DISCONNECT packet sent: the broker discards the LWT)
+[16:11:10.966] DISCONNECTED (rc=Normal disconnection)
+[16:11:12.980] ===== QoS 0: 40 readings sent, 26 received, 14 lost [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+[16:11:13.081] ===== broker stopped (SIGTERM)
+[16:11:13.682] ===== broker started (pid 692, persistence on)
+[16:11:14.084] ===== started sensor_publisher.py --client-id task3-pub-q1 --qos 1 --seq --persistent --interval 0.5 --count 40 --status-topic none --seed 1
+[16:11:14.164] CONNECTED to 127.0.0.1:1883 as task3-pub-q1 (rc=Success, keepalive 5 s)
+[16:11:14.465] PUBLISH factory/line3/temperature = 64.7 #1 (QoS 1, retained)
+[16:11:14.965] PUBLISH factory/line3/temperature = 89.7 #2 (QoS 1)
+[16:11:15.466] PUBLISH factory/line3/temperature = 86.7 #3 (QoS 1)
+[16:11:15.966] PUBLISH factory/line3/temperature = 68.9 #4 (QoS 1)
+[16:11:16.467] PUBLISH factory/line3/temperature = 77.3 #5 (QoS 1)
+[16:11:16.967] PUBLISH factory/line3/temperature = 75.7 #6 (QoS 1)
+[16:11:17.468] PUBLISH factory/line3/temperature = 82.8 #7 (QoS 1)
+[16:11:17.969] PUBLISH factory/line3/temperature = 87.6 #8 (QoS 1)
+[16:11:18.470] PUBLISH factory/line3/temperature = 63.3 #9 (QoS 1)
+[16:11:18.971] PUBLISH factory/line3/temperature = 61.0 #10 (QoS 1)
+[16:11:19.471] PUBLISH factory/line3/temperature = 89.3 #11 (QoS 1)
+[16:11:19.972] PUBLISH factory/line3/temperature = 75.1 #12 (QoS 1)
+[16:11:20.173] ===== broker stopped (SIGTERM)
+[16:11:20.173] ===== QoS 1: broker DOWN for 5 s (unreliable network)
+[16:11:20.173] DISCONNECTED (rc=Unspecified error)
+[16:11:20.472] PUBLISH factory/line3/temperature = 86.7 #13 (QoS 1)  [queued: not connected]
+[16:11:20.972] PUBLISH factory/line3/temperature = 60.1 #14 (QoS 1)  [queued: not connected]
+[16:11:21.474] PUBLISH factory/line3/temperature = 75.6 #15 (QoS 1)  [queued: not connected]
+[16:11:21.975] PUBLISH factory/line3/temperature = 85.3 #16 (QoS 1)  [queued: not connected]
+[16:11:22.475] PUBLISH factory/line3/temperature = 68.0 #17 (QoS 1)  [queued: not connected]
+[16:11:22.975] PUBLISH factory/line3/temperature = 93.1 #18 (QoS 1)  [queued: not connected]
+[16:11:23.476] PUBLISH factory/line3/temperature = 91.5 #19 (QoS 1)  [queued: not connected]
+[16:11:23.976] PUBLISH factory/line3/temperature = 61.1 #20 (QoS 1)  [queued: not connected]
+[16:11:24.477] PUBLISH factory/line3/temperature = 60.9 #21 (QoS 1)  [queued: not connected]
+[16:11:24.977] PUBLISH factory/line3/temperature = 78.9 #22 (QoS 1)  [queued: not connected]
+[16:11:25.477] PUBLISH factory/line3/temperature = 92.9 #23 (QoS 1)  [queued: not connected]
+[16:11:25.775] ===== broker started (pid 698, persistence on)
+[16:11:25.978] PUBLISH factory/line3/temperature = 73.3 #24 (QoS 1)  [queued: not connected]
+[16:11:26.478] PUBLISH factory/line3/temperature = 67.6 #25 (QoS 1)  [queued: not connected]
+[16:11:26.978] PUBLISH factory/line3/temperature = 74.8 #26 (QoS 1)  [queued: not connected]
+[16:11:27.175] CONNECTED to 127.0.0.1:1883 as task3-pub-q1 (rc=Success, keepalive 5 s)
+[16:11:27.479] PUBLISH factory/line3/temperature = 61.0 #27 (QoS 1)
+[16:11:27.980] PUBLISH factory/line3/temperature = 67.8 #28 (QoS 1)
+[16:11:28.480] PUBLISH factory/line3/temperature = 75.3 #29 (QoS 1)
+[16:11:28.980] PUBLISH factory/line3/temperature = 77.4 #30 (QoS 1)
+[16:11:29.481] PUBLISH factory/line3/temperature = 68.2 #31 (QoS 1)
+[16:11:29.981] PUBLISH factory/line3/temperature = 68.1 #32 (QoS 1)
+[16:11:30.482] PUBLISH factory/line3/temperature = 67.7 #33 (QoS 1)
+[16:11:30.982] PUBLISH factory/line3/temperature = 76.1 #34 (QoS 1)
+[16:11:31.483] PUBLISH factory/line3/temperature = 70.1 #35 (QoS 1)
+[16:11:31.983] PUBLISH factory/line3/temperature = 60.8 #36 (QoS 1)
+[16:11:32.483] PUBLISH factory/line3/temperature = 89.3 #37 (QoS 1)
+[16:11:32.984] PUBLISH factory/line3/temperature = 79.5 #38 (QoS 1)
+[16:11:33.484] PUBLISH factory/line3/temperature = 82.5 #39 (QoS 1)
+[16:11:33.985] PUBLISH factory/line3/temperature = 66.5 #40 (QoS 1)
+[16:11:34.486] clean disconnect (DISCONNECT packet sent: the broker discards the LWT)
+[16:11:34.486] DISCONNECTED (rc=Normal disconnection)
+[16:11:36.502] ===== QoS 1: 40 readings sent, 40 received, 0 lost 
+[16:11:36.602] ===== broker stopped (SIGTERM)
+
+QoS 0: 40 readings sent, 26 received, 14 lost [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+QoS 1: 40 readings sent, 40 received, 0 lost 

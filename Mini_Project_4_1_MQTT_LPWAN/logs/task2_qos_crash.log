@@ -1,0 +1,39 @@
+Lab task 2: publisher SIGKILLs itself immediately after its 3rd publish call, 10 trials per QoS level.
+
+QoS 0 trial  1: received [1, 2] -> last reading (#3) LOST
+QoS 0 trial  2: received [1, 2, 3] -> last reading (#3) received
+QoS 0 trial  3: received [1, 2, 3] -> last reading (#3) received
+QoS 0 trial  4: received [1, 2, 3] -> last reading (#3) received
+QoS 0 trial  5: received [1, 2] -> last reading (#3) LOST
+QoS 0 trial  6: received [1, 2] -> last reading (#3) LOST
+QoS 0 trial  7: received [1, 2] -> last reading (#3) LOST
+QoS 0 trial  8: received [1, 2, 3] -> last reading (#3) received
+QoS 0 trial  9: received [1, 2, 3] -> last reading (#3) received
+QoS 0 trial 10: received [1, 2, 3] -> last reading (#3) received
+QoS 0: last reading before the crash received in 6/10 trials
+QoS 1 trial  1: received [1, 2] -> last reading (#3) LOST
+QoS 1 trial  2: received [1, 2] -> last reading (#3) LOST
+QoS 1 trial  3: received [1, 2] -> last reading (#3) LOST
+QoS 1 trial  4: received [1, 2] -> last reading (#3) LOST
+QoS 1 trial  5: received [1, 2] -> last reading (#3) LOST
+QoS 1 trial  6: received [1, 2] -> last reading (#3) LOST
+QoS 1 trial  7: received [1, 2] -> last reading (#3) LOST
+QoS 1 trial  8: received [1, 2] -> last reading (#3) LOST
+QoS 1 trial  9: received [1, 2] -> last reading (#3) LOST
+QoS 1 trial 10: received [1, 2] -> last reading (#3) LOST
+QoS 1: last reading before the crash received in 0/10 trials
+QoS 2 trial  1: received [1, 2] -> last reading (#3) LOST
+QoS 2 trial  2: received [1, 2] -> last reading (#3) LOST
+QoS 2 trial  3: received [1, 2] -> last reading (#3) LOST
+QoS 2 trial  4: received [1, 2] -> last reading (#3) LOST
+QoS 2 trial  5: received [1, 2] -> last reading (#3) LOST
+QoS 2 trial  6: received [1, 2] -> last reading (#3) LOST
+QoS 2 trial  7: received [1, 2] -> last reading (#3) LOST
+QoS 2 trial  8: received [1, 2] -> last reading (#3) LOST
+QoS 2 trial  9: received [1, 2] -> last reading (#3) LOST
+QoS 2 trial 10: received [1, 2] -> last reading (#3) LOST
+QoS 2: last reading before the crash received in 0/10 trials
+
+QoS 0: last reading before the crash received in 6/10 trials
+QoS 1: last reading before the crash received in 0/10 trials
+QoS 2: last reading before the crash received in 0/10 trials

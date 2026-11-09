@@ -1,0 +1,53 @@
+Weights: data rate 1.0, coverage 1.5, battery life 1.0, mobility 1.5, infrastructure ownership 1.0, cost per device 1.0
+
+Smart water meter (4.3)  (expected from the unit's reasoning: NB-IoT)
+  inputs: 0.000111 kbit/s -> rate level 1, coverage deep_indoor, battery 12 y -> level 5, mobility stationary, ownership operator, 100000 devices / low budget -> cost level 5
+  1. NB-IoT      95.7  Above the field on coverage, infrastructure ownership; no weak axis.
+  2. LoRaWAN     85.7  Above the field on battery life, cost per device; no weak axis.
+  3. LTE-M       82.9  Above the field on infrastructure ownership, coverage; below on cost per device.
+  4. 5G RedCap   32.1  Above the field on infrastructure ownership; below on cost per device, coverage. Rules: R5 battery target out of reach.
+  5. Zigbee      16.1  Above the field on cost per device; below on infrastructure ownership, coverage. Rules: R3 short range only; R5 battery target out of reach.
+  6. BLE         15.0  Above the field on cost per device; below on infrastructure ownership, coverage. Rules: R3 short range only; R5 battery target out of reach.
+
+Fleet-tracked shipping container (4.3)  (expected from the unit's reasoning: LTE-M)
+  inputs: 0.000889 kbit/s -> rate level 1, coverage wide_area, battery 5 y -> level 3, mobility global, ownership operator, 10000 devices / medium budget -> cost level 4
+  1. LTE-M       91.4  Above the field on mobility, coverage; no weak axis.
+  2. NB-IoT      87.1  Above the field on coverage, infrastructure ownership; below on mobility.
+  3. 5G RedCap   74.3  Above the field on mobility, infrastructure ownership; below on cost per device.
+  4. LoRaWAN     32.1  Above the field on cost per device; below on mobility. Rules: R2 no handover for wide-area mobility.
+  5. BLE         10.7  Above the field on cost per device; below on coverage, infrastructure ownership. Rules: R2 no handover for wide-area mobility; R3 short range only.
+  6. Zigbee      10.7  Above the field on cost per device; below on coverage, infrastructure ownership. Rules: R2 no handover for wide-area mobility; R3 short range only.
+
+Factory-floor sensor network (4.3)  (expected from the unit's reasoning: Zigbee / BLE)
+  inputs: 20 kbit/s -> rate level 3, coverage short_range, battery 2 y -> level 2, mobility stationary, ownership self, 300 devices / medium budget -> cost level 2
+  1. BLE        100.0  Above the field on coverage, infrastructure ownership; no weak axis.
+  2. Zigbee     100.0  Above the field on coverage, infrastructure ownership; no weak axis.
+  3. NB-IoT      75.7  Above the field on no axis; below on infrastructure ownership, coverage.
+  4. LTE-M       75.7  Above the field on no axis; below on infrastructure ownership, coverage.
+  5. 5G RedCap   74.3  Above the field on no axis; below on coverage, cost per device.
+  6. LoRaWAN     33.1  Above the field on infrastructure ownership; below on coverage, data rate. Rules: R1 data rate below requirement.
+
+Wearable health monitor (4.3)  (expected from the unit's reasoning: BLE)
+  inputs: 16 kbit/s -> rate level 3, coverage short_range, battery 0.1 y -> level 1, mobility local, ownership any, 20000 devices / medium budget -> cost level 4
+  1. BLE        100.0  Above the field on coverage, cost per device; no weak axis. Rules: R4 no per-device fees at scale.
+  2. Zigbee      92.7  Above the field on coverage, cost per device; below on mobility. Rules: R4 no per-device fees at scale.
+  3. NB-IoT      72.0  Above the field on cost per device; below on coverage. Rules: R4 subscription per device at scale.
+  4. LTE-M       72.0  Above the field on mobility; below on coverage. Rules: R4 subscription per device at scale.
+  5. 5G RedCap   64.3  Above the field on mobility; below on cost per device, coverage. Rules: R4 subscription per device at scale.
+  6. LoRaWAN     33.3  Above the field on cost per device; below on coverage, data rate. Rules: R1 data rate below requirement; R4 no per-device fees at scale.
+
+NEW: Akagera wildlife collars  (expected from the unit's reasoning: LoRaWAN)
+  inputs: 4.44e-05 kbit/s -> rate level 1, coverage rural_long_range, battery 3 y -> level 3, mobility local, ownership self, 40 devices / low budget -> cost level 2
+  1. LoRaWAN     95.7  Above the field on coverage, infrastructure ownership; no weak axis.
+  2. LTE-M       80.0  Above the field on mobility, coverage; below on infrastructure ownership.
+  3. NB-IoT      75.7  Above the field on coverage; below on infrastructure ownership.
+  4. 5G RedCap   74.3  Above the field on mobility; below on cost per device, infrastructure ownership.
+  5. BLE         37.1  Above the field on infrastructure ownership; below on coverage. Rules: R3 short range only.
+  6. Zigbee      32.9  Above the field on infrastructure ownership; below on coverage, mobility. Rules: R3 short range only.
+
+scenario                                        expected         1st  score         2nd  score
+Smart water meter (4.3)                           NB-IoT      NB-IoT   95.7     LoRaWAN   85.7
+Fleet-tracked shipping container (4.3)             LTE-M       LTE-M   91.4      NB-IoT   87.1
+Factory-floor sensor network (4.3)          Zigbee / BLE         BLE  100.0      Zigbee  100.0
+Wearable health monitor (4.3)                        BLE         BLE  100.0      Zigbee   92.7
+NEW: Akagera wildlife collars                    LoRaWAN     LoRaWAN   95.7       LTE-M   80.0
